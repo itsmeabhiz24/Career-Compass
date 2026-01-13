@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homepage - Career Compass</title>
+
+  <!-- FontAwesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <!-- Google Font: Orbitron for futuristic style -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* 🌌 Background Gradient */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(-45deg, #0f111a, #1e1e2f, #2c2c3c, #0f111a);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* 🌟 Page Title */
+    .page-title {
+      margin-bottom: 40px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .page-title h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 4rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #00f0ff;
+      text-shadow:
+        0 0 10px #00f0ff,
+        0 0 20px #00d4ff,
+        0 0 30px #00aaff,
+        0 0 40px #00aaff,
+        0 0 50px #00aaff,
+        0 0 75px #00aaff;
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 10px #00f0ff,
+          0 0 20px #00d4ff,
+          0 0 30px #00aaff,
+          0 0 40px #00aaff,
+          0 0 50px #00aaff,
+          0 0 75px #00aaff;
+      }
+      50% {
+        text-shadow:
+          0 0 20px #00e0ff,
+          0 0 35px #00bbff,
+          0 0 45px #0099ff,
+          0 0 60px #0099ff,
+          0 0 70px #0099ff,
+          0 0 100px #0099ff;
+      }
+    }
+
+    /* 🌫️ Glassmorphic Container */
+    .container {
+      background: rgba(30, 30, 47, 0.8);
+      padding: 40px 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+      text-align: center;
+      width: 900px;
+      max-width: 95vw;
+    }
+
+    .container h2 {
+      font-size: 1.5rem;
+      color: #00f0ff;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    /* ⚡ Options Grid - horizontal */
+    .options-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    /* 🔷 Option Cards */
+    .option-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.05);
+      flex: 1; /* evenly spaced */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .option-card:hover {
+      background: rgba(0, 240, 255, 0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .option-card i {
+      font-size: 42px;
+      margin-bottom: 15px;
+      text-shadow: 0 0 8px #00f0ff;
+    }
+
+    .option-card h3 {
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+
+    .option-card p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    /* 🚪 Logout Button */
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #00f0ff;
+      color: #0f111a;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 12px #00f0ff;
+      transition: 0.3s;
+      z-index: 10;
+    }
+
+    .logout-btn:hover {
+      background: #3d9fff;
+      color: #fff;
+      box-shadow: 0 0 20px #3d9fff;
+    }
+
+    @media (max-width: 800px) {
+      /* stack vertically on small screens */
+      .container {
+        width: 90vw;
+      }
+      .options-grid {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 🔓 Logout Button -->
+  <a href="{{ url_for('logout') }}">
+    <button class="logout-btn">Logout</button>
+  </a>
+
+  <!-- 🌟 Title -->
+  <header class="page-title">
+    <h1>Career Compass</h1>
+  </header>
+
+  <!-- 💫 Homepage Content -->
+  <div class="container">
+    <h2>Welcome, {{ user }}!</h2>
+    <p class="subtitle">Choose an option below:</p>
+
+    <!-- 🎯 Options Grid (horizontal) -->
+    <div class="options-grid">
+      <!-- Interest Analyzer -->
+      <a href="{{ url_for('quiz') }}" class="option-card">
+        <i class="fas fa-search"></i>
+        <h3>Interest Analyzer</h3>
+        <p>Discover your interests and strengths.</p>
+      </a>
+
+      <!-- Career Graph -->
+      <a href="{{ url_for('career_graph') }}" class="option-card">
+        <i class="fas fa-chart-line"></i>
+        <h3>Career Graph</h3>
+        <p>Visualize your career progress and options.</p>
+      </a>
+
+      <!-- Roadmap -->
+      <a href="{{ url_for('roadmap') }}" class="option-card">
+        <i class="fas fa-road"></i>
+        <h3>Roadmap</h3>
+        <p>Keep track of your personalized roadmap.</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="hnfjVlabsa3_wJB-DX_MC";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Career Compass</title>
+
+  <!-- 🧬 Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins&display=swap" rel="stylesheet">
+
+  <style>
+    /* 🌌 Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #dcdcdc;
+      background: linear-gradient(-45deg, #0f111a, #1e1e2f, #2c2c3c, #0f111a);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 🧊 Neon Glass Container */
+    .container {
+      position: relative;
+      background: rgba(30, 30, 47, 0.85);
+      padding: 40px;
+      border-radius: 20px;
+      width: 350px;
+      max-width: 90%;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 0.8s ease-in-out;
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00f0ff;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: #dcdcdc;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus {
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 10px #00f0ff;
+    }
+
+    button {
+      width: 95%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #00f0ff, #3d9fff);
+      color: #0f111a;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 0 15px #00f0ff;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #3d9fff, #00f0ff);
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #00f0ff, 0 0 40px #3d9fff;
+    }
+
+    .flash {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .flash.error { background: #ff3d9f; color: white; }
+    .flash.success { background: #00e676; color: #0f111a; }
+
+    p {
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: #00f0ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #3d9fff;
+    }
+
+    @media (max-width: 400px) {
+      .container {
+        padding: 25px;
+      }
+
+      input, button {
+        width: 100%;
+      }
+    }
+
+    /* 🌌 Floating Neon Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, transparent 70%);
+      animation: floatOrb 30s linear infinite;
+      z-index: 1;
+      filter: blur(8px);
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translateY(100vh) scale(0.6); opacity: 0.3; }
+      50% { opacity: 0.7; }
+      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🌌 Floating Orbs -->
+  <div class="orb" style="width: 80px; height: 80px; left: 35%; animation-duration: 24s;"></div>
+  <div class="orb" style="width: 100px; height: 100px; left: 40%; animation-duration: 30s;"></div>
+  <div class="orb" style="width: 60px; height: 60px; left: 70%; animation-duration: 40s;"></div>
+  <div class="orb" style="width: 90px; height: 90px; left: 85%; animation-duration: 28s;"></div>
+
+  <!-- 🧊 Login Form -->
+  <div class="container">
+    <h2>🔑 Login</h2>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <input type="text" name="username" placeholder="Username" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{{ url_for('signup') }}">Signup here</a></p>
+  </div>
+
+</body>
+</html>

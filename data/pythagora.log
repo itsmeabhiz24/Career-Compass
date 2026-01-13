@@ -1,0 +1,97 @@
+2025-11-11T16:43:44.566Z INFO SharedStateManager initialized
+2025-11-11T16:43:44.585Z INFO Is remote: false
+2025-11-11T16:43:44.594Z INFO Starting Local. Installation path: undefined
+2025-11-11T16:43:44.603Z INFO [MainProvider] Creating new MainProvider instance...
+2025-11-11T16:43:44.615Z INFO Installation path exists: d:\COMPASS\COMPASS\static
+2025-11-11T16:43:44.623Z INFO Initializing database with URL: file:C:\Users\Abhis\AppData\Local\Temp\pythagora-temp\pythagora.db
+2025-11-11T16:43:44.637Z INFO New database detected, running full prisma setup...
+2025-11-11T16:43:44.646Z INFO [c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32] Project root:
+2025-11-11T16:43:44.653Z INFO [c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\prisma\schema.prisma] Schema path:
+2025-11-11T16:43:44.662Z INFO [file:C:\Users\Abhis\AppData\Local\Temp\pythagora-temp\pythagora.db] Database URL:
+2025-11-11T16:43:44.670Z INFO [true] Schema exists:
+2025-11-11T16:43:44.678Z INFO Running prisma generate first...
+2025-11-11T16:43:44.742Z ERROR Database initialization error
+Error: Command failed: node "c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\node_modules\prisma\build\index.js" generate --schema="c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\prisma\schema.prisma"
+'node' is not recognized as an internal or external command,
+operable program or batch file.
+
+Stack: Error: Command failed: node "c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\node_modules\prisma\build\index.js" generate --schema="c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\prisma\schema.prisma"
+'node' is not recognized as an internal or external command,
+operable program or batch file.
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at checkExecSyncError (node:child_process:948:11)
+    at execSync (node:child_process:1020:15)
+    at node:electron/js2c/node_init:2:17346
+    at PrismaSession.ensureDatabaseSync (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\core\CustomPrismaSession.js:91:65)
+    at new PrismaSession (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\core\CustomPrismaSession.js:17:18)
+    at PrismaSession.getInstance (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\core\CustomPrismaSession.js:28:38)
+    at initializeDatabase (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\extension.js:46:45)
+    at activate (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\extension.js:117:15)
+    at Gb.n (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:13382)
+    at Gb.m (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:13345)
+    at Gb.l (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:12801)
+Extra context: {
+  "stdout": "",
+  "stderr": "'node' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n",
+  "signal": null,
+  "message": "Command failed: node \"c:\\Users\\Abhis\\.vscode\\extensions\\pythagoratechnologies.pythagora-vs-code-2.5.32\\node_modules\\prisma\\build\\index.js\" generate --schema=\"c:\\Users\\Abhis\\.vscode\\extensions\\pythagoratechnologies.pythagora-vs-code-2.5.32\\prisma\\schema.prisma\"\n'node' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n"
+}
+2025-11-11T16:43:44.762Z ERROR Failed to ensure database
+Error: Command failed: node "c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\node_modules\prisma\build\index.js" generate --schema="c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\prisma\schema.prisma"
+'node' is not recognized as an internal or external command,
+operable program or batch file.
+
+Stack: Error: Command failed: node "c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\node_modules\prisma\build\index.js" generate --schema="c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\prisma\schema.prisma"
+'node' is not recognized as an internal or external command,
+operable program or batch file.
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at checkExecSyncError (node:child_process:948:11)
+    at execSync (node:child_process:1020:15)
+    at node:electron/js2c/node_init:2:17346
+    at PrismaSession.ensureDatabaseSync (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\core\CustomPrismaSession.js:91:65)
+    at new PrismaSession (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\core\CustomPrismaSession.js:17:18)
+    at PrismaSession.getInstance (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\core\CustomPrismaSession.js:28:38)
+    at initializeDatabase (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\extension.js:46:45)
+    at activate (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\extension.js:117:15)
+    at Gb.n (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:13382)
+    at Gb.m (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:13345)
+    at Gb.l (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:12801)
+Extra context: {
+  "stdout": "",
+  "stderr": "'node' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n",
+  "signal": null,
+  "message": "Command failed: node \"c:\\Users\\Abhis\\.vscode\\extensions\\pythagoratechnologies.pythagora-vs-code-2.5.32\\node_modules\\prisma\\build\\index.js\" generate --schema=\"c:\\Users\\Abhis\\.vscode\\extensions\\pythagoratechnologies.pythagora-vs-code-2.5.32\\prisma\\schema.prisma\"\n'node' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n"
+}
+2025-11-11T16:43:44.775Z INFO Database initialized successfully
+2025-11-11T16:43:44.784Z INFO [Migration] Checking for database migration...
+2025-11-11T16:43:44.792Z INFO [Migration] No migration needed
+2025-11-11T16:47:17.958Z INFO Closing entire Pythagora extension...
+2025-11-11T16:47:18.025Z ERROR Error closing extension
+Error: Canceled
+Stack: Canceled: Canceled
+    at new MR (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:116391)
+    at U4.U (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:121001)
+    at Proxy.s.<computed>.n.charCodeAt.s.<computed> (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:29:118495)
+    at iy.g (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:41101)
+    at iy.executeCommand (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:114:40605)
+    at Object.executeCommand (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:201:105071)
+    at closeEntirePythagoraExtension (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\extension.js:536:31)
+    at Object.deactivate (c:\Users\Abhis\.vscode\extensions\pythagoratechnologies.pythagora-vs-code-2.5.32\out\extension.js:427:15)
+    at SZ.eb (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:118:11797)
+    at file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:118:9947
+    at Array.map (<anonymous>)
+    at SZ.$ (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:118:9935)
+    at SZ.terminate (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:118:10178)
+    at H3.terminate (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:120:914)
+    at Ss (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:393:10409)
+    at MessagePortMain.<anonymous> (file:///c:/Users/Abhis/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:393:6948)
+    at MessagePortMain.emit (node:events:519:28)
+    at Object.MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2949)
+    at Object.callbackTrampoline (node:internal/async_hooks:130:17)
+Extra context: {
+  "message": "Canceled"
+}

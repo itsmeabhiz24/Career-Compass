@@ -1,0 +1,91 @@
+/* 🌌 Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 🌠 Neon Dark Body */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #dcdcdc;
+  background: linear-gradient(-45deg, #0f111a, #1e1e2f, #2c2c3c, #0f111a);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ✨ Card Container (Neon Panel) */
+.container {
+  position: relative;
+  width: 350px;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(30, 30, 47, 0.8);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 1;
+}
+
+/* 🧠 Headings with Orbitron */
+.container h2, .result-container h1, .result-card h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: #00f0ff;
+  text-align: center;
+}
+
+/* 🔘 Neon Button */
+.container button, .btn-home {
+  background: linear-gradient(135deg, #00f0ff, #3d9fff);
+  border: none;
+  padding: 12px 25px;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #00f0ff;
+  transition: 0.3s;
+}
+
+.container button:hover,
+.btn-home:hover {
+  box-shadow: 0 0 25px #00f0ff, 0 0 50px #3d9fff;
+  transform: scale(1.05);
+}
+
+/* 📊 Chart Styling (JS config will use this color scheme) */
+canvas {
+  background-color: transparent;
+}
+
+/* 💬 Chatbox Panel */
+.chatbox {
+  background: rgba(30,30,47,0.85);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+}
+
+/* 🌐 Floating Chat Icon */
+.chat-icon {
+  background: #00f0ff;
+  color: #0f111a;
+}
+.chat-icon:hover {
+  background: #3d9fff;
+}
+
+/* ✅ Flash Messages (Updated Colors) */
+.flash.success { background: #00e676; color: #0f111a; }
+.flash.error   { background: #ff3d9f; color: white; }

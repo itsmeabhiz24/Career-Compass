@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personalized Career Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(-45deg, #0f111a, #1e1e2f, #2c2c3c, #0f111a);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      background: rgba(30, 30, 47, 0.85);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 900px;
+      margin: auto;
+    }
+    canvas {
+      max-width: 100%;
+      cursor: pointer;
+    }
+    #courseDetails {
+      margin-top: 30px;
+      text-align: left;
+      background: rgba(0, 240, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+      display: none;
+    }
+    #courseDetails h3 {
+      color: #00f0ff;
+      margin-top: 0;
+    }
+    .college-block {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      border-left: 5px solid transparent;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    .college-block h4 {
+      color: #00d4ff;
+      margin-bottom: 10px;
+    }
+    .college-block p {
+      margin: 6px 0;
+    }
+
+    /* Type-based styles */
+    .college-block.private {
+      border-left-color: #ff9800; /* Orange */
+      background-color: rgba(255, 152, 0, 0.1);
+    }
+    .college-block.government {
+      border-left-color: #4caf50; /* Green */
+      background-color: rgba(76, 175, 80, 0.1);
+    }
+    .college-block.international {
+      border-left-color: #2196f3; /* Blue */
+      background-color: rgba(33, 150, 243, 0.1);
+    }
+
+    /* Optional small label for type */
+    .college-type-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 5px;
+      margin-left: 10px;
+      vertical-align: middle;
+      color: #fff;
+    }
+    .college-type-label.private {
+      background-color: #ff9800;
+    }
+    .college-type-label.government {
+      background-color: #4caf50;
+    }
+    .college-type-label.international {
+      background-color: #2196f3;
+    }
+    .home-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #00f0ff;
+  color: #000;
+  padding: 10px 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+}
+.home-btn:hover {
+  background-color: #00c7d6;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📊 Personalized Career Graph</h2>
+    <canvas id="careerChart"></canvas>
+
+    <div id="courseDetails">
+      <h3 id="courseTitle"></h3>
+      <p id="courseDesc"></p>
+      <div id="collegeList"></div>
+    </div>
+  </div>
+
+<script>
+  const allCourses = [
+    {
+      course: "Data Science",
+      popularity: 80,
+      future_scope: 90,
+      quiz_score: 85,
+      description: "Learn to analyze and interpret complex data to help make informed decisions.",
+      colleges: [
+        {
+          name: "MIT",
+          location: "USA",
+          placement: "95%",
+          fees: "$50,000/year",
+          scholarships: "Merit-based, need-based available",
+          admission: "SAT/GRE + Statement of Purpose + Interview",
+          campusLife: "Innovative culture, top-tier labs, student-run research programs",
+          support: "Career services, alumni mentoring, 24/7 helpline",
+          type: "international"
+        },
+        {
+          name: "IIT Bombay",
+          location: "India",
+          placement: "90%",
+          fees: "₹2,00,000/year",
+          scholarships: "JEE merit, government and private aids",
+          admission: "JEE Advanced + Interview",
+          campusLife: "Techfests, clubs, lush campus near Powai Lake",
+          support: "Incubation centre, startup cell, personal mentorship",
+          type: "government"
+        },
+        {
+          name: "BITS Pilani",
+          location: "India",
+          placement: "92%",
+          fees: "₹3,50,000/year",
+          scholarships: "Merit scholarships, need-based aids",
+          admission: "BITSAT + Interview",
+          campusLife: "Vibrant tech fests, diverse student clubs",
+          support: "Strong alumni network, career counseling",
+          type: "private"
+        }
+      ]
+    },
+    {
+      course: "AI & Machine Learning",
+      popularity: 65,
+      future_scope: 95,
+      quiz_score: 80,
+      description: "Design intelligent systems that learn from data and improve over time.",
+      colleges: [
+        {
+          name: "Stanford University",
+          location: "USA",
+          placement: "94%",
+          fees: "$52,000/year",
+          scholarships: "Research assistantships, scholarships",
+          admission: "GRE, TOEFL, SOP, Research background",
+          campusLife: "Valley access, tech talks, AI labs",
+          support: "AI mentor programs, global industry tie-ups",
+          type: "international"
+        },
+        {
+          name: "IIT Kharagpur",
+          location: "India",
+          placement: "89%",
+          fees: "₹2,20,000/year",
+          scholarships: "Merit-based, SC/ST/OBC/GEN-EWS schemes",
+          admission: "JEE Advanced + counseling",
+          campusLife: "Kshitij fest, excellent faculty-student ratio",
+          support: "Tech clubs, mentorship, mental wellness programs",
+          type: "government"
+        },
+        {
+          name: "Vellore Institute of Technology (VIT)",
+          location: "India",
+          placement: "88%",
+          fees: "₹3,00,000/year",
+          scholarships: "Merit and sports scholarships",
+          admission: "VITEEE + Interview",
+          campusLife: "Modern labs, tech fests, cultural events",
+          support: "Dedicated career services, startup incubation",
+          type: "private"
+        }
+      ]
+    },
+    {
+      course: "Cybersecurity",
+      popularity: 70,
+      future_scope: 88,
+      quiz_score: 78,
+      description: "Protect systems and networks from digital attacks and threats.",
+      colleges: [
+        {
+          name: "Carnegie Mellon University",
+          location: "USA",
+          placement: "93%",
+          fees: "$48,000/year",
+          scholarships: "Cyber fellowships available",
+          admission: "GRE + Interview",
+          campusLife: "Top security labs, hackathons",
+          support: "Security-focused mentoring, internship support",
+          type: "international"
+        },
+        {
+          name: "IISc Bangalore",
+          location: "India",
+          placement: "89%",
+          fees: "₹2,50,000/year",
+          scholarships: "GATE-based funding",
+          admission: "GATE + Interview",
+          campusLife: "Peaceful campus, advanced R&D facilities",
+          support: "Startup incubators, research support",
+          type: "government"
+        },
+        {
+          name: "SRM Institute of Science and Technology",
+          location: "India",
+          placement: "85%",
+          fees: "₹2,80,000/year",
+          scholarships: "Merit scholarships",
+          admission: "SRMJEEE + Interview",
+          campusLife: "Tech clubs, international collaborations",
+          support: "Internship programs, career guidance",
+          type: "private"
+        }
+      ]
+    },
+    {
+      course: "Cloud Computing",
+      popularity: 68,
+      future_scope: 92,
+      quiz_score: 82,
+      description: "Deploy and manage scalable applications on the cloud.",
+      colleges: [
+        {
+          name: "University of California, Berkeley",
+          location: "USA",
+          placement: "91%",
+          fees: "$46,000/year",
+          scholarships: "Assistantships and fellowships",
+          admission: "GRE + SOP + LOR",
+          campusLife: "Open labs, industry events",
+          support: "Cloud bootcamps, networking with tech leaders",
+          type: "international"
+        },
+        {
+          name: "IIT Delhi",
+          location: "India",
+          placement: "88%",
+          fees: "₹2,00,000/year",
+          scholarships: "Merit-based and government scholarships",
+          admission: "JEE Advanced",
+          campusLife: "Urban tech exposure, coding societies",
+          support: "Cloud training, startup grants",
+          type: "government"
+        },
+        {
+          name: "Manipal Institute of Technology",
+          location: "India",
+          placement: "86%",
+          fees: "₹2,90,000/year",
+          scholarships: "Merit and sports scholarships",
+          admission: "MET + Interview",
+          campusLife: "Tech fests, startup culture",
+          support: "Career support, industry tie-ups",
+          type: "private"
+        }
+      ]
+    },
+    {
+      course: "UI/UX Design",
+      popularity: 75,
+      future_scope: 85,
+      quiz_score: 74,
+      description: "Design intuitive and beautiful digital user experiences.",
+      colleges: [
+        {
+          name: "Parsons School of Design",
+          location: "USA",
+          placement: "87%",
+          fees: "$44,000/year",
+          scholarships: "Portfolio-based",
+          admission: "Portfolio, SOP, Interview",
+          campusLife: "Creative studio environment, design exhibitions",
+          support: "Career counseling, portfolio mentoring",
+          type: "international"
+        },
+        {
+          name: "NID Ahmedabad",
+          location: "India",
+          placement: "82%",
+          fees: "₹2,50,000/year",
+          scholarships: "Merit/Government",
+          admission: "Design Aptitude Test (DAT) + Studio Test + Interview",
+          campusLife: "Open studios, design fests",
+          support: "Faculty mentoring, peer reviews",
+          type: "government"
+        },
+        {
+          name: "Srishti Institute of Art, Design and Technology",
+          location: "India",
+          placement: "80%",
+          fees: "₹2,20,000/year",
+          scholarships: "Merit-based scholarships",
+          admission: "Portfolio + Interview",
+          campusLife: "Collaborative studios, workshops",
+          support: "Mentoring, industry projects",
+          type: "private"
+        }
+      ]
+    },
+    {
+      course: "Game Development",
+      popularity: 60,
+      future_scope: 80,
+      quiz_score: 72,
+      description: "Design, develop and publish interactive games.",
+      colleges: [
+        {
+          name: "University of Utah",
+          location: "USA",
+          placement: "85%",
+          fees: "$38,000/year",
+          scholarships: "Merit + Game dev scholarships",
+          admission: "Portfolio + SAT/GRE",
+          campusLife: "Game jams, dev expos",
+          support: "Career center, project mentoring",
+          type: "international"
+        },
+        {
+          name: "Vancouver Film School",
+          location: "Canada",
+          placement: "83%",
+          fees: "$35,000/year",
+          scholarships: "Creative merit awards",
+          admission: "Portfolio + Interview",
+          campusLife: "Intense studio culture",
+          support: "Industry projects, demo days",
+          type: "international"
+        },
+        {
+          name: "Dhirubhai Ambani Institute of Information and Communication Technology (DA-IICT)",
+          location: "India",
+          placement: "82%",
+          fees: "₹3,00,000/year",
+          scholarships: "Merit scholarships",
+          admission: "JEE Main + Interview",
+          campusLife: "Tech events, gaming clubs",
+          support: "Mentorship, career services",
+          type: "private"
+        }
+      ]
+    },
+    {
+      course: "Robotics",
+      popularity: 67,
+      future_scope: 89,
+      quiz_score: 79,
+      description: "Design and build robots and autonomous machines.",
+      colleges: [
+        {
+          name: "ETH Zurich",
+          location: "Switzerland",
+          placement: "90%",
+          fees: "CHF 1,500/semester",
+          scholarships: "International merit scholarships",
+          admission: "GRE + Motivation Letter",
+          campusLife: "Cutting-edge labs, beautiful Alps",
+          support: "Research grants, robotics labs",
+          type: "international"
+        },
+        {
+          name: "IIT Kanpur",
+          location: "India",
+          placement: "87%",
+          fees: "₹2,10,000/year",
+          scholarships: "GATE/merit",
+          admission: "JEE Advanced / GATE",
+          campusLife: "Tech fests, innovation labs",
+          support: "R&D support, innovation hub",
+          type: "government"
+        },
+        {
+          name: "Shiv Nadar University",
+          location: "India",
+          placement: "85%",
+          fees: "₹3,20,000/year",
+          scholarships: "Merit-based scholarships",
+          admission: "SNUSAT + Interview",
+          campusLife: "State-of-the-art robotics labs, research-driven culture",
+          support: "Industry partnerships, career services",
+          type: "private"
+        }
+      ]
+    }
+  ];
+
+  const QUIZ_SCORE_THRESHOLD = 70;
+
+  const ctx = document.getElementById('careerChart').getContext('2d');
+  let careerChart;
+
+  const filteredCourses = allCourses.filter(course => course.quiz_score >= QUIZ_SCORE_THRESHOLD);
+
+  function renderGraph(courses) {
+    const labels = courses.map(c => c.course);
+    const popularity = courses.map(c => c.popularity);
+    const futureScope = courses.map(c => c.future_scope);
+
+    if (careerChart) careerChart.destroy();
+
+    careerChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Popularity (%)',
+            data: popularity,
+            backgroundColor: 'rgba(54, 162, 235, 0.7)'
+          },
+          {
+            label: 'Future Scope (%)',
+            data: futureScope,
+            backgroundColor: 'rgba(255, 99, 132, 0.7)'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: { color: '#fff', stepSize: 10 },
+            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+          },
+          x: {
+            ticks: { color: '#fff' },
+            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+          }
+        },
+        plugins: {
+          legend: { labels: { color: '#fff' } },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%'
+            }
+          }
+        },
+        onClick(evt) {
+          const points = careerChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, false);
+          if (points.length) {
+            const idx = points[0].index;
+            showCourseDetails(courses[idx]);
+          }
+        }
+      }
+    });
+  }
+
+  function showCourseDetails(course) {
+    document.getElementById('courseTitle').textContent = course.course;
+    document.getElementById('courseDesc').textContent = course.description;
+
+    const collegeList = document.getElementById('collegeList');
+    collegeList.innerHTML = '';
+
+    course.colleges.forEach(college => {
+      const div = document.createElement('div');
+      div.className = 'college-block ' + (college.type || '');  // Add type class if exists
+
+      // Capitalize type label
+      const typeLabel = college.type
+        ? `<span class="college-type-label ${college.type}">${college.type.charAt(0).toUpperCase() + college.type.slice(1)}</span>`
+        : '';
+
+      div.innerHTML = `
+        <h4>🎓 ${college.name} ${typeLabel}</h4>
+        <p><strong>📍 Location:</strong> ${college.location}</p>
+        <p><strong>💼 Placement:</strong> ${college.placement}</p>
+        <p><strong>📘 Fees & Scholarships:</strong> ${college.fees} — ${college.scholarships}</p>
+        <p><strong>📝 Admission Process:</strong> ${college.admission}</p>
+        <p><strong>📍 Campus Life:</strong> ${college.campusLife}</p>
+        <p><strong>🤝 Student Support:</strong> ${college.support}</p>
+      `;
+      collegeList.appendChild(div);
+    });
+
+    document.getElementById('courseDetails').style.display = 'block';
+    document.getElementById('courseDetails').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  window.onload = () => {
+    renderGraph(filteredCourses);
+  };
+  
+</script>
+  <!-- ✅ Home Button -->
+<a href="{{ url_for('home') }}" class="home-btn">🏠 Home</a>
+
+
+
+    <div id="courseDetails">
+      <h3 id="courseTitle"></h3>
+      <p id="courseDesc"></p>
+      <div id="collegeList"></div>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="hnfjVlabsa3_wJB-DX_MC";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>

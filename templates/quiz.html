@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interest Analyzer Quiz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* 🌌 Neon Gradient Background */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(-45deg, #0f111a, #1e1e2f, #2c2c3c, #0f111a);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 🧊 Glassmorphic Container */
+    .quiz-container {
+      background: rgba(30, 30, 47, 0.8);
+      padding: 35px;
+      border-radius: 20px;
+      width: 700px;
+      max-width: 95%;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+      backdrop-filter: blur(12px);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #00f0ff;
+      margin-bottom: 25px;
+    }
+
+    .question {
+      margin-bottom: 25px;
+    }
+
+    .question-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #00f0ff;
+    }
+
+    /* 🧠 Option Cards */
+    .option-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option-card:hover {
+      background: rgba(0, 240, 255, 0.08);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    input[type="radio"]:checked + .option-text {
+      background: #00f0ff;
+      color: #0f111a;
+      font-weight: bold;
+      box-shadow: 0 0 12px #00f0ff;
+    }
+
+    .option-text {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    /* 🚀 Submit Button */
+    input[type="submit"] {
+      margin-top: 25px;
+      width: 100%;
+      background: #00f0ff;
+      color: #0f111a;
+      padding: 14px 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 12px #00f0ff;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    input[type="submit"]:hover {
+      background: #3d9fff;
+      color: #fff;
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #3d9fff;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-container {
+        padding: 25px;
+      }
+
+      .question-title {
+        font-size: 16px;
+      }
+
+      input[type="submit"] {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+  <h2>🎯 Interest Analyzer Quiz</h2>
+  <form method="POST">
+    <div class="question">
+      <div class="question-title">{{ question_num }}. {{ question.question }}</div>
+
+      {% for option in question.options %}
+        <label class="option-card">
+          <input type="radio" name="answer" value="{{ option }}" required />
+          <span class="option-text">{{ option }}</span>
+        </label>
+      {% endfor %}
+    </div>
+
+    <input type="submit" value="{{ 'Submit Quiz' if question_num == total_questions else 'Next Question' }}" />
+  </form>
+</div>
+
+</body>
+</html>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="hnfjVlabsa3_wJB-DX_MC";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>

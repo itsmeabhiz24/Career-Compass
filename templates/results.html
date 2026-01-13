@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career Results</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(-45deg, #0f111a, #1e1e2f, #2c2c3c, #0f111a);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(30, 30, 47, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+      width: 900px;
+      max-width: 95vw;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #00f0ff;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 16px;
+      padding: 20px 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      background: rgba(0, 240, 255, 0.1);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #00f0ff;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    ul li {
+      margin-bottom: 6px;
+      color: #ccc;
+    }
+
+    p {
+      margin: 0;
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+
+    .btn-home {
+      display: block;
+      width: fit-content;
+      margin: 30px auto 0;
+      padding: 12px 25px;
+      background: #00f0ff;
+      color: #0f111a;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 12px #00f0ff;
+      transition: 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-home:hover {
+      background: #3d9fff;
+      color: #fff;
+      box-shadow: 0 0 20px #3d9fff;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Detailed Career Analysis for {{ user }}</h1>
+
+    <div class="card">
+      <h2>Interest Area</h2>
+      <p><strong>{{ interest }}</strong> – This area matches your skills and preferences.  
+      You are likely suited for roles that value {{ "logic, problem solving, and technology" if interest=="STEM" else "creativity, storytelling, and design" if interest=="Creative" else "empathy, service, and social impact" if interest=="Social" else "leadership, strategy, and decision-making" }}.</p>
+    </div>
+
+    <div class="card">
+      <h2>Possible Career Paths</h2>
+      <ul>
+        {% if interest == "STEM" %}
+          <li>Software Engineer, Data Scientist, AI Specialist</li>
+          <li>Mechanical / Electrical Engineer</li>
+          <li>Researcher in Physics, Chemistry, or Mathematics</li>
+        {% elif interest == "Creative" %}
+          <li>Graphic Designer, Animator, UI/UX Designer</li>
+          <li>Film Making, Visual Effects (VFX), Game Designer</li>
+          <li>Fashion & Interior Design</li>
+        {% elif interest == "Social" %}
+          <li>Doctor, Nurse, Physiotherapist</li>
+          <li>Teacher, Professor, Psychologist</li>
+          <li>Social Worker, Policy Maker</li>
+        {% elif interest == "Business" %}
+          <li>Entrepreneur, Startup Founder</li>
+          <li>Finance & Investment Banker</li>
+          <li>Business Consultant, Marketing Head</li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Important Entrance Exams</h2>
+      <ul>
+        {% if interest == "STEM" %}
+          <li>JEE Main & Advanced</li>
+          <li>BITSAT, VITEEE, SRMJEEE</li>
+          <li>GATE (for higher studies)</li>
+        {% elif interest == "Creative" %}
+          <li>UCEED (IIT Design), NID DAT</li>
+          <li>NIFT Entrance (Fashion Design)</li>
+          <li>FTII (Film & Television)</li>
+        {% elif interest == "Social" %}
+          <li>NEET (Medical)</li>
+          <li>CUET (Social Sciences, Education)</li>
+          <li>TISSNET (Social Work)</li>
+        {% elif interest == "Business" %}
+          <li>IPMAT (Integrated MBA at IIMs)</li>
+          <li>CAT, XAT, MAT (MBA)</li>
+          <li>GMAT (International MBA)</li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Skills to Develop</h2>
+      <ul>
+        {% if interest == "STEM" %}
+          <li>Programming (Python, C++, Java)</li>
+          <li>Mathematics & Logical Reasoning</li>
+          <li>Problem Solving & Research</li>
+        {% elif interest == "Creative" %}
+          <li>Drawing & Illustration</li>
+          <li>Adobe Photoshop, Illustrator, Figma</li>
+          <li>Storytelling & Creativity</li>
+        {% elif interest == "Social" %}
+          <li>Communication & Empathy</li>
+          <li>Biology & Psychology</li>
+          <li>Teaching & Social Engagement</li>
+        {% elif interest == "Business" %}
+          <li>Leadership & Public Speaking</li>
+          <li>Financial Analysis</li>
+          <li>Entrepreneurship & Marketing</li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Future Scope</h2>
+      <p>
+        {% if interest == "STEM" %}
+          High demand in technology and research globally. Careers in AI, data, robotics are booming.
+        {% elif interest == "Creative" %}
+          Growing opportunities in digital media, gaming, animation, and fashion industries.
+        {% elif interest == "Social" %}
+          Essential field with stable demand. Medicine, teaching, and psychology are always valued.
+        {% elif interest == "Business" %}
+          Unlimited growth potential with startups, corporate leadership, and global business opportunities.
+        {% endif %}
+      </p>
+    </div>
+
+
+
+    <a href="{{ url_for('home') }}" class="btn-home">🏠 Go to Home</a>
+  </div>
+</body>
+</html>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="hnfjVlabsa3_wJB-DX_MC";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
